@@ -42,6 +42,7 @@ process make_chunks {
 
 process pileup_variants {
     // Calls variants per region ("chunk") using pileup network.
+    machineType 'mem3_ssd1_v2_x4'
     label "wf_human_snp"
     cpus 1
     errorStrategy 'retry'

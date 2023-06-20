@@ -57,6 +57,7 @@ process decompress_ref {
 
 //NOTE grep MOSDEPTH_TUPLE if changing output tuple
 process mosdepth {
+    machineType 'mem3_ssd1_v2_x4'
     cpus 2
     input:
         tuple path(xam), path(xam_idx), val(xam_meta)
@@ -135,6 +136,7 @@ process readStats {
 // This is the only way to publish files from a workflow whilst
 // decoupling the publish from the process steps.
 process publish_artifact {
+    machineType 'mem3_ssd1_v2_x4'
     publishDir "${params.out_dir}", mode: 'copy', pattern: "*"
     input:
         file fname
