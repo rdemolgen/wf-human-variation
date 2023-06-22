@@ -34,7 +34,8 @@ Map parse_arguments(Map arguments) {
 //  last i checked this is stuck on resolving an API call they shouldn't have been using
 // as you can imagine i am not happy about this
 process cram_to_bam {
-    cpus 2
+    machineType 'mem2_ssd1_v2_x8'
+    //cpus 2
     input:
         tuple path(cram), path(crai)
         tuple path(ref), path(ref_idx)
@@ -49,8 +50,9 @@ process cram_to_bam {
 
 
 process minimap2_alignment {
-    memory '12 GB' // needs to be around 12 for humvar, could be smaller if user isnt doing WGA
-    cpus {params.ubam_map_threads + params.ubam_sort_threads + params.ubam_bam2fq_threads}
+    machineType 'mem2_ssd1_v2_x8'
+    //memory '12 GB' // needs to be around 12 for humvar, could be smaller if user isnt doing WGA
+   //cpus {params.ubam_map_threads + params.ubam_sort_threads + params.ubam_bam2fq_threads}
     input:
         path reference
         tuple path(reads), path(reads_idx), path(old_reference)
@@ -67,7 +69,7 @@ process minimap2_alignment {
 
 
 process check_for_alignment {
-
+    machineType 'mem2_ssd1_v2_x8'
     input:
         tuple path(reference), path(ref_idx)
         tuple path(xam), path(xam_idx)
@@ -90,6 +92,7 @@ process check_for_alignment {
 }
 
 process samtools_index {
+    machineType 'mem2_ssd1_v2_x8'
     input:
         path(xam)
     output:
